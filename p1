@@ -1,0 +1,23 @@
+FUNC max3(a, b, c) {
+    CHECK a > b THEN {
+        CHECK a > c THEN {
+            RETURN a;
+        } END
+        OTHERWISE {
+            RETURN c;
+        } END
+    } END
+    OTHERWISE {
+        CHECK b > c THEN {
+            RETURN b;
+        } END
+        OTHERWISE {
+            RETURN c;
+        } END
+    } END
+}
+
+INT a = 5;
+INT b = 8;
+INT c = 3;
+PRINT(max3(a, b, c));

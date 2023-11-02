@@ -50,6 +50,7 @@ public class Scanner {
 
             String[] tokens = processedLine.split("\\s+");
             for (String token : tokens) {
+                if (token.trim().isEmpty()) continue;
                 if (RESERVED_WORDS.contains(token)) {
                     pif.add(new PIFEntry(token, -1));
                 } else if (SPECIAL_SYMBOLS.contains(token)) {
@@ -74,25 +75,10 @@ public class Scanner {
     }
 
     private String preprocess(String line) {
-        line = line.replace("==", " == ");
-        line = line.replace("!=", " != ");
-        line = line.replace(">=", " >= ");
-        line = line.replace("<=", " <= ");
-        line = line.replace(";", " ; ");
-        line = line.replace("+", " + ");
-        line = line.replace("-", " - ");
-        line = line.replace("*", " * ");
-        line = line.replace("/", " / ");
-        line = line.replace(">", " > ");
-        line = line.replace("<", " < ");
-        line = line.replace("(", " ( ");
-        line = line.replace(")", " ) ");
-        line = line.replace("[", " [ ");
-        line = line.replace("]", " ] ");
-        line = line.replace("{", " { ");
-        line = line.replace("}", " } ");
-        line = line.replace(",", " , ");
-        return line;
+        for (String sym : SPECIAL_SYMBOLS) {
+            line = line.replace(sym, " " + sym + " ");
+        }
+        return line.trim().replaceAll("\\s+", " ");
     }
 
     private void writeOutput(List<PIFEntry> pif, SymbolTable st) {

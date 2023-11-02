@@ -1,0 +1,15 @@
+FUNC is_prime(n) {
+    CHECK n <= 1 THEN {
+        RETURN 0;
+    } END
+    INT i = 2;
+    LOOP i FROM 2 TO n/2 {
+        CHECK n % i == 0 THEN {
+            RETURN 0;
+        } END
+    }
+    RETURN 1;
+}
+
+INT num = 29;
+PRINT(is_prime(num));

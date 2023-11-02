@@ -1,0 +1,11 @@
+FUNC sum_n(n) {
+    INT sum = 0;
+    INT i = 1;
+    LOOP i FROM 1 TO n {
+        sum = sum + i;
+    }
+    RETURN sum;
+}
+
+INT n = 10;
+PRINT(sum_n(n));

@@ -1,2 +1,2 @@
-Special symbols: + - * / = > < ( ) [ ] { } , ; == != >= <=
-Reserved words: VAR FUNC LOOP FROM TO CHECK THEN OTHERWISE END RETURN NOTE PRINT READ INT STRING BOOL REAL STEP ARRAY OF
+Special symbols: + - * / % ( ) [ ] { } , ; == != >= <= = > <
+Reserved words: VAR FUNC LOOP FROM TO CHECK THEN OTHERWISE END RETURN PRINT READ INT STRING BOOL REAL STEP ARRAY OF
