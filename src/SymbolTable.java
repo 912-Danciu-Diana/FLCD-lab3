@@ -17,10 +17,12 @@ public class SymbolTable extends HashTable {
         return super.contains(value);
     }
 
+    @Override
     public int getPosition(String value) {
         return super.getPosition(value);
     }
 
+    @Override
     public void print(PrintWriter out){
         super.print(out);
     }
