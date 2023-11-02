@@ -39,7 +39,7 @@ public class Scanner {
     public void scan() {
         SymbolTable st = new SymbolTable();
         List<PIFEntry> pif = new ArrayList<>();
-        boolean is_correct = true;
+        boolean lexically_correct = true;
 
         String[] lines = sourceCode.split("\n");
         int currentLine = 0;
@@ -62,13 +62,13 @@ public class Scanner {
                     pif.add(new PIFEntry("Const", st.getPosition(token)));
                 } else {
                     System.out.println("Lexical error: Unrecognized token '" + token + "' at line " + currentLine);
-                    is_correct = false;
+                    lexically_correct = false;
                 }
             }
         }
 
         writeOutput(pif, st);
-        if(is_correct){
+        if(lexically_correct){
             System.out.println("Lexically correct");
         }
     }
