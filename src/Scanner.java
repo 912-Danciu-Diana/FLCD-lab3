@@ -3,6 +3,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Scanner {
     private String sourceCode;
@@ -44,14 +46,30 @@ public class Scanner {
         String[] lines = sourceCode.split("\n");
         int currentLine = 0;
 
+        String stringPattern = "\"([^\"]*)\"";
+
         for (String line : lines) {
             currentLine++;
-            String processedLine = preprocess(line);
 
+            List<String> stringConstants = new ArrayList<>();
+            Matcher matcher = Pattern.compile(stringPattern).matcher(line);
+            while (matcher.find()) {
+                stringConstants.add(matcher.group());
+                line = line.replace(matcher.group(), "#STR#");
+            }
+
+            String processedLine = preprocess(line);
             String[] tokens = processedLine.split("\\s+");
+
+            int stringIndex = 0;
+
             for (String token : tokens) {
                 if (token.trim().isEmpty()) continue;
-                if (RESERVED_WORDS.contains(token)) {
+                if (token.equals("#STR#")) {
+                    token = stringConstants.get(stringIndex++);
+                    st.add(token);
+                    pif.add(new PIFEntry("Const", st.getPosition(token)));
+                } else if (RESERVED_WORDS.contains(token)) {
                     pif.add(new PIFEntry(token, -1));
                 } else if (SPECIAL_SYMBOLS.contains(token)) {
                     pif.add(new PIFEntry(token, -1));
